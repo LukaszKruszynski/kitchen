@@ -1,4 +1,4 @@
-package com.kitchen.kitchen;
+package com.kitchen;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
