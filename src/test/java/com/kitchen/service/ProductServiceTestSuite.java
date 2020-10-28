@@ -40,9 +40,7 @@ public class ProductServiceTestSuite {
                 .name("Ser")
                 .note("Najlepiej gouda")
                 .quantity("300g")
-                .storageType(StorageType.FRIDGE)
-                .build();
-
+                .storageType(StorageType.FRIDGE).build();
         product3 = new Product.ProductBuilder()
                 .id(3l)
                 .barcode(43265785l)
