@@ -2,10 +2,7 @@ package com.kitchen.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode
 @Entity(name = "products")
 public class Product {
     @Id
@@ -22,25 +20,64 @@ public class Product {
     private String note;
     private Long barcode;
     private LocalDate expiryDate;
+    @Enumerated(EnumType.STRING)
+    private StorageType storageType;
     @ManyToOne
     @JoinColumn
-    private Fridge fridge;
-    @ManyToOne
-    @JoinColumn
-    private Freezer freezer;
-    @ManyToOne
-    @JoinColumn
-    private Pantry pantry;
-    @ManyToOne
-    @JoinColumn
-    private Shopping shopping;
+    private User user;
 
-    public Product(Long id, String name, String quantity, String note, Long barcode, LocalDate expiryDate) {
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.note = note;
-        this.barcode = barcode;
-        this.expiryDate = expiryDate;
+    public static final class ProductBuilder {
+        private Long id;
+        private String name;
+        private String quantity;
+        private String note;
+        private Long barcode;
+        private LocalDate expiryDate;
+        private StorageType storageType;
+        private User user;
+
+        public ProductBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public ProductBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ProductBuilder quantity(String quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public ProductBuilder note(String note) {
+            this.note = note;
+            return this;
+        }
+
+        public ProductBuilder barcode(Long barcode) {
+            this.barcode = barcode;
+            return this;
+        }
+
+        public ProductBuilder expiryDate(LocalDate expiryDate) {
+            this.expiryDate = expiryDate;
+            return this;
+        }
+
+        public ProductBuilder storageType(StorageType storageType) {
+            this.storageType = storageType;
+            return this;
+        }
+
+        public ProductBuilder user(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public Product build() {
+            return new Product(id,name,quantity,note,barcode,expiryDate,storageType,user);
+        }
     }
 }

@@ -1,34 +1,27 @@
 package com.kitchen.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class User {
     @Id
     private Long id;
     private String name;
-    @OneToOne
-    @JoinColumn
-    private Fridge fridge;
-    @OneToOne
-    @JoinColumn
-    private Freezer freezer;
-    @OneToOne
-    @JoinColumn
-    private Pantry pantry;
-    @OneToOne
-    @JoinColumn
-    private Shopping shopping;
+    @OneToMany(
+            targetEntity = Product.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    private List<Product> products;
 }
