@@ -80,7 +80,7 @@ public class ProductServiceTestSuite {
         newProduct.setExpiryDate(LocalDate.now());
         newProduct.setBarcode("1234567");
 
-        productRepository.save(newProduct);
+//        productRepository.save(newProduct);
         System.out.println("hello word");
     }
 }

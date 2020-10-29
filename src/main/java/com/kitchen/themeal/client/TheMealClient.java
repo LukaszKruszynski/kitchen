@@ -32,11 +32,31 @@ public class TheMealClient {
                 .build().encode().toUri();
     }
 
+    private URI buildUrlSearchById(String id) {
+        return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/lookup.php?i=" + id)
+                .build().encode().toUri();
+    }
+
+    private URI buildUrlGetCategories() {
+        return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/list.php?c=list")
+                .build().encode().toUri();
+    }
+
+    private URI buildUrlGetAreas() {
+        return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/list.php?a=list")
+                .build().encode().toUri();
+    }
+
+    private URI buildUrlGetIngredients() {
+        return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/list.php?i=list")
+                .build().encode().toUri();
+    }
+
     public TheMealDto getRandomMeal() {
         return restTemplate.getForObject(buildUrlRandomMeal(), TheMealDto.class);
     }
 
-    public TheMealDto getMeal(String name) {
+    public TheMealDto getMealByName(String name) {
         return restTemplate.getForObject(buildUrlSearchMealByName(name), TheMealDto.class);
     }
 
@@ -44,4 +64,20 @@ public class TheMealClient {
         return restTemplate.getForObject(buildUrlSearchByMainIngredient(ingredient), TheMealDto.class);
     }
 
+    public TheMealDto getMealById(String id) {
+        return restTemplate.getForObject(buildUrlSearchById(id), TheMealDto.class);
+    }
+
+    public TheMealDto getCategories() {
+        return restTemplate.getForObject(buildUrlGetCategories(), TheMealDto.class);
+    }
+
+    public TheMealDto getAreas() {
+        return restTemplate.getForObject(buildUrlGetAreas(), TheMealDto.class);
+    }
+
+    public TheMealDto getIngredients() {
+        return restTemplate.getForObject(buildUrlGetIngredients(), TheMealDto.class);
+
+    }
 }

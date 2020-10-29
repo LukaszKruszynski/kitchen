@@ -17,13 +17,33 @@ public class TheMealController {
         return client.getRandomMeal();
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/search/name/{name}")
     public TheMealDto getMealByName(@PathVariable String name) {
-        return client.getMeal(name);
+        return client.getMealByName(name);
     }
 
-    @GetMapping("/{ingredient}")
+    @GetMapping("/search/ingredient/{ingredient}")
     public TheMealDto getMealByMainIngredient(@PathVariable String ingredient) {
         return client.getMealByMainIngredient(ingredient);
+    }
+
+    @GetMapping("/{id}")
+    public TheMealDto getMealById(@PathVariable String id) {
+        return client.getMealById(id);
+    }
+
+    @GetMapping("/list/categories")
+    public TheMealDto getCategories() {
+        return client.getCategories();
+    }
+
+    @GetMapping("/list/areas")
+    public TheMealDto getAreas() {
+        return client.getAreas();
+    }
+
+    @GetMapping("/list/ingredients")
+    public TheMealDto getIngredients() {
+        return client.getIngredients();
     }
 }
