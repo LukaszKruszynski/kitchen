@@ -2,8 +2,6 @@ package com.kitchen.mapper.product;
 
 import com.kitchen.domain.Product;
 import com.kitchen.dto.ProductDto;
-import com.kitchen.mapper.user.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,8 +9,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProductMapper {
-    @Autowired
-    UserMapper userMapper;
+
 
     public Product mapToProduct(final ProductDto productDto) {
         return new Product.ProductBuilder()
@@ -23,7 +20,6 @@ public class ProductMapper {
                 .barcode(productDto.getBarcode())
                 .expiryDate(productDto.getExpiryDate())
                 .storageType(productDto.getStorageType())
-                .user(userMapper.mapToUser(productDto.getUserDto()))
                 .build();
     }
 
@@ -36,7 +32,6 @@ public class ProductMapper {
                 .barcode(product.getBarcode())
                 .expiryDate(product.getExpiryDate())
                 .storageType(product.getStorageType())
-                .userDto(userMapper.mapToUserDto(product.getUser()))
                 .build();
     }
 

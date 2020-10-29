@@ -11,11 +11,10 @@ import java.util.Optional;
 @Service
 public class ProductService {
     @Autowired
-    ProductRepository repository;
+    private ProductRepository repository;
 
     public Product saveProduct(final Product product) {
-        repository.save(product);
-        return product;
+        return repository.save(product);
     }
 
     public void deleteProduct(final Long id) {

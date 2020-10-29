@@ -15,20 +15,18 @@ public class ProductDto {
     private String name;
     private String quantity;
     private String note;
-    private Long barcode;
+    private String barcode;
     private LocalDate expiryDate;
     private StorageType storageType;
-    private UserDto userDto;
 
     public static final class ProductDtoBuilder {
         private Long id;
         private String name;
         private String quantity;
         private String note;
-        private Long barcode;
+        private String barcode;
         private LocalDate expiryDate;
         private StorageType storageType;
-        private UserDto userDto;
 
         public ProductDtoBuilder id(Long id) {
             this.id = id;
@@ -50,7 +48,7 @@ public class ProductDto {
             return this;
         }
 
-        public ProductDtoBuilder barcode(Long barcode) {
+        public ProductDtoBuilder barcode(String barcode) {
             this.barcode = barcode;
             return this;
         }
@@ -65,13 +63,8 @@ public class ProductDto {
             return this;
         }
 
-        public ProductDtoBuilder userDto(UserDto userDto) {
-            this.userDto = userDto;
-            return this;
-        }
-
         public ProductDto build() {
-            return new ProductDto(id, name, quantity, note, barcode, expiryDate, storageType, userDto);
+            return new ProductDto(id, name, quantity, note, barcode, expiryDate, storageType);
         }
     }
 }

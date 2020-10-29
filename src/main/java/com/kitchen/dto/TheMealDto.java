@@ -1,4 +1,4 @@
-package com.kitchen.domain;
+package com.kitchen.dto;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +63,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "strSource",
         "dateModified"
 })
-public class TheMeal {
+public class TheMealDto {
 
     @JsonProperty("idMeal")
     public String idMeal;

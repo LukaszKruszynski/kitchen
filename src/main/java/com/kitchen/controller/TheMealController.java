@@ -1,6 +1,6 @@
 package com.kitchen.controller;
 
-import com.kitchen.domain.TheMeal;
+import com.kitchen.dto.TheMealDto;
 import com.kitchen.themeal.client.TheMealClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +13,17 @@ public class TheMealController {
     private TheMealClient client;
 
     @GetMapping("/random")
-    public TheMeal getRandomMeal() {
+    public TheMealDto getRandomMeal() {
         return client.getRandomMeal();
     }
 
-    @GetMapping("/search={name}")
-    public TheMeal getMealByName(@PathVariable String name) {
+    @GetMapping("/{name}")
+    public TheMealDto getMealByName(@PathVariable String name) {
         return client.getMeal(name);
+    }
+
+    @GetMapping("/{ingredient}")
+    public TheMealDto getMealByMainIngredient(@PathVariable String ingredient) {
+        return client.getMealByMainIngredient(ingredient);
     }
 }
