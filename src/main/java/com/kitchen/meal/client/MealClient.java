@@ -1,21 +1,23 @@
-package com.kitchen.themeal.client;
+package com.kitchen.meal.client;
 
-import com.kitchen.dto.TheMealDto;
-import com.kitchen.themeal.configuration.TheMealConfig;
+import com.kitchen.dto.MealCategoryListDto;
+import com.kitchen.dto.MealDto;
+import com.kitchen.dto.MealListDto;
+import com.kitchen.meal.configuration.MealConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
-@Component
-public class TheMealClient {
+@Service
+public class MealClient {
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
-    private TheMealConfig config;
+    private MealConfig config;
 
     private URI buildUrlRandomMeal() {
         return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/random.php")
@@ -38,7 +40,7 @@ public class TheMealClient {
     }
 
     private URI buildUrlGetCategories() {
-        return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/list.php?c=list")
+        return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/categories.php")
                 .build().encode().toUri();
     }
 
@@ -52,32 +54,32 @@ public class TheMealClient {
                 .build().encode().toUri();
     }
 
-    public TheMealDto getRandomMeal() {
-        return restTemplate.getForObject(buildUrlRandomMeal(), TheMealDto.class);
+    public MealListDto getRandomMeal() {
+        return restTemplate.getForObject(buildUrlRandomMeal(), MealListDto.class);
     }
 
-    public TheMealDto getMealByName(String name) {
-        return restTemplate.getForObject(buildUrlSearchMealByName(name), TheMealDto.class);
+    public MealListDto getMealByName(String name) {
+        return restTemplate.getForObject(buildUrlSearchMealByName(name), MealListDto.class);
     }
 
-    public TheMealDto getMealByMainIngredient(String ingredient) {
-        return restTemplate.getForObject(buildUrlSearchByMainIngredient(ingredient), TheMealDto.class);
+    public MealListDto getMealsByMainIngredient(String ingredient) {
+        return restTemplate.getForObject(buildUrlSearchByMainIngredient(ingredient), MealListDto.class);
     }
 
-    public TheMealDto getMealById(String id) {
-        return restTemplate.getForObject(buildUrlSearchById(id), TheMealDto.class);
+    public MealListDto getMealById(String id) {
+        return restTemplate.getForObject(buildUrlSearchById(id), MealListDto.class);
     }
 
-    public TheMealDto getCategories() {
-        return restTemplate.getForObject(buildUrlGetCategories(), TheMealDto.class);
+    public MealCategoryListDto getCategories() {
+        return restTemplate.getForObject(buildUrlGetCategories(), MealCategoryListDto.class);
     }
 
-    public TheMealDto getAreas() {
-        return restTemplate.getForObject(buildUrlGetAreas(), TheMealDto.class);
+    public MealListDto getAreas() {
+        return restTemplate.getForObject(buildUrlGetAreas(), MealListDto.class);
     }
 
-    public TheMealDto getIngredients() {
-        return restTemplate.getForObject(buildUrlGetIngredients(), TheMealDto.class);
+    public MealListDto getIngredients() {
+        return restTemplate.getForObject(buildUrlGetIngredients(), MealListDto.class);
 
     }
 }

@@ -4,11 +4,13 @@ import com.kitchen.domain.Product;
 import com.kitchen.domain.StorageType;
 import com.kitchen.repository.ProductRepository;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootTest
 public class ProductServiceTestSuite {
@@ -23,12 +25,11 @@ public class ProductServiceTestSuite {
     private Product product4;
     private Product product5;
 
-    @Before
-    void init() {
-
+    @BeforeEach
+    public void init() {
         product1 = new Product.ProductBuilder()
                 .barcode("2020123")
-                .expiryDate(LocalDate.of(2020, 10, 31))
+                .expiryDate(LocalDate.now())
                 .name("Szynka")
                 .note("Na kolacje")
                 .quantity("pól kilo")
@@ -37,7 +38,7 @@ public class ProductServiceTestSuite {
 
         product2 = new Product.ProductBuilder()
                 .barcode("6574532")
-                .expiryDate(LocalDate.of(2020, 11, 2))
+                .expiryDate(LocalDate.now())
                 .name("Ser")
                 .note("Najlepiej gouda")
                 .quantity("300g")
@@ -46,7 +47,7 @@ public class ProductServiceTestSuite {
 
         product3 = new Product.ProductBuilder()
                 .barcode("43265785")
-                .expiryDate(LocalDate.of(2021, 8, 15))
+                .expiryDate(LocalDate.now())
                 .name("Frytki")
                 .note("Karbowane")
                 .quantity("paczka 2kg")
@@ -55,7 +56,7 @@ public class ProductServiceTestSuite {
 
         product4 = new Product.ProductBuilder()
                 .barcode("4365785785")
-                .expiryDate(LocalDate.of(2022, 8, 10))
+                .expiryDate(LocalDate.now())
                 .name("kukurydza")
                 .note("w puszce")
                 .quantity("400g")
@@ -68,19 +69,17 @@ public class ProductServiceTestSuite {
                 .quantity("1kg")
                 .storageType(StorageType.SHOPPING)
                 .build();
-
     }
     @Test
     void test() {
-        Product newProduct = new Product();
-        newProduct.setStorageType(StorageType.PANTRY);
-        newProduct.setQuantity("to");
-        newProduct.setNote("chyba");
-        newProduct.setName("dziala");
-        newProduct.setExpiryDate(LocalDate.now());
-        newProduct.setBarcode("1234567");
+        productService.saveProduct(product1);
+        productService.saveProduct(product2);
+        productService.saveProduct(product3);
+        productService.saveProduct(product4);
+        productService.saveProduct(product5);
+        List<Product> resultList = productService.getProductsByName("Szynka");
+        System.out.println(resultList);
 
-//        productRepository.save(newProduct);
-        System.out.println("hello word");
+        System.out.println("ss");
     }
 }

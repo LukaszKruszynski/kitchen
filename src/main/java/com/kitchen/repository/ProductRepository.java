@@ -11,5 +11,6 @@ public interface ProductRepository extends CrudRepository<Product,Long> {
 
     @Override
     List<Product> findAll();
+    List<Product> findAllByNameContains(String name);
 
 }
