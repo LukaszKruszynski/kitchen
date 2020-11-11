@@ -3,6 +3,7 @@ package com.kitchen.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
@@ -14,11 +15,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
+    @NotNull
     private String name;
     private String quantity;
     private String note;
     private String barcode;
     private LocalDate expiryDate;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private StorageType storageType;
 

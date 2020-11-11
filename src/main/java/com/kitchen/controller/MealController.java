@@ -37,14 +37,4 @@ public class MealController {
     public MealCategoryListDto getCategories() {
         return client.getCategories();
     }
-
-    @GetMapping("/list/areas")
-    public MealListDto getAreas() {
-        return client.getAreas();
-    }
-
-    @GetMapping("/list/ingredients")
-    public MealListDto getIngredients() {
-        return client.getIngredients();
-    }
 }

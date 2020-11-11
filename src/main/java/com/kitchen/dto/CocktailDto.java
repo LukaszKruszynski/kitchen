@@ -3,6 +3,8 @@ package com.kitchen.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AccessLevel;
+import lombok.Builder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -60,6 +62,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "strCreativeCommonsConfirmed",
         "dateModified"
 })
+@Builder()
 public class CocktailDto {
 
     @JsonProperty("idDrink")

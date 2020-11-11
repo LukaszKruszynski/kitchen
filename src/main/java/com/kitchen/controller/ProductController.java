@@ -21,7 +21,7 @@ public class ProductController {
 
     @GetMapping
     public List<ProductDto> getProducts() {
-        return mapper.mapToProductDtos(service.getProducts());
+        return mapper.mapToProductsDtos(service.getProducts());
     }
 
     @GetMapping(value = "/{id}")
@@ -46,47 +46,47 @@ public class ProductController {
 
     @GetMapping(value = "/fridge")
     public List<ProductDto> getProductsFridge() {
-        return mapper.mapToProductDtos(service.getProductsFridge());
+        return mapper.mapToProductsDtos(service.getProductsFridge());
     }
 
     @GetMapping(value = "/freezer")
     public List<ProductDto> getProductsFreezer() {
-        return mapper.mapToProductDtos(service.getProductsFreezer());
+        return mapper.mapToProductsDtos(service.getProductsFreezer());
     }
 
     @GetMapping(value = "/pantry")
     public List<ProductDto> getProductsPantry() {
-        return mapper.mapToProductDtos(service.getProductsPantry());
+        return mapper.mapToProductsDtos(service.getProductsPantry());
     }
 
     @GetMapping(value = "/shopping")
     public List<ProductDto> getProductShopping() {
-        return mapper.mapToProductDtos(service.getProductsShopping());
+        return mapper.mapToProductsDtos(service.getProductsShopping());
     }
 
     @GetMapping(value = "/exp/today")
     public List<ProductDto> getProductsExpiryDateEndsToday() {
-        return mapper.mapToProductDtos(service.getProductsWithExpireDateEndsToday());
+        return mapper.mapToProductsDtos(service.getProductsWithExpireDateEndsToday());
     }
 
     @GetMapping(value ="fridge/search/{name}")
     public List<ProductDto> getFridgeProductsByNameContains(@PathVariable String name) {
-        return mapper.mapToProductDtos(service.getFridgeProductsByNameContains(name));
+        return mapper.mapToProductsDtos(service.getFridgeProductsByNameContains(name));
     }
 
     @GetMapping(value ="freezer/search/{name}")
     public List<ProductDto> getFreezerProductsByNameContains(@PathVariable String name) {
-        return mapper.mapToProductDtos(service.getFreezerProductsByNameContains(name));
+        return mapper.mapToProductsDtos(service.getFreezerProductsByNameContains(name));
     }
 
     @GetMapping(value ="pantry/search/{name}")
     public List<ProductDto> getPantryProductsByNameContains(@PathVariable String name) {
-        return mapper.mapToProductDtos(service.getPantryProductsByNameContains(name));
+        return mapper.mapToProductsDtos(service.getPantryProductsByNameContains(name));
     }
 
     @GetMapping(value ="shopping/search/{name}")
     public List<ProductDto> getShoppingProductsByNameContains(@PathVariable String name) {
-        return mapper.mapToProductDtos(service.getShoppingProductsByNameContains(name));
+        return mapper.mapToProductsDtos(service.getShoppingProductsByNameContains(name));
     }
 
 

@@ -73,13 +73,4 @@ public class MealClient {
     public MealCategoryListDto getCategories() {
         return restTemplate.getForObject(buildUrlGetCategories(), MealCategoryListDto.class);
     }
-
-    public MealListDto getAreas() {
-        return restTemplate.getForObject(buildUrlGetAreas(), MealListDto.class);
-    }
-
-    public MealListDto getIngredients() {
-        return restTemplate.getForObject(buildUrlGetIngredients(), MealListDto.class);
-
-    }
 }

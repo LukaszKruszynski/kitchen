@@ -23,4 +23,5 @@ class MailTestSuite {
         assertEquals("Test",mail2.getMessage());
         assertEquals("Test",mail2.getToCc());
     }
+
 }

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 @Component
 public class ProductMapper {
 
-
     public Product mapToProduct(final ProductDto productDto) {
         return new Product.ProductBuilder()
                 .id(productDto.getId())
@@ -41,7 +40,7 @@ public class ProductMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductDto> mapToProductDtos(final List<Product> products) {
+    public List<ProductDto> mapToProductsDtos(final List<Product> products) {
         return products.stream()
                 .map(this::mapToProductDto)
                 .collect(Collectors.toList());

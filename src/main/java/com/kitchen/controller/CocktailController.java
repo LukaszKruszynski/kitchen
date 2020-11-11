@@ -33,11 +33,6 @@ public class CocktailController {
         return client.getCocktailById(id);
     }
 
-    @GetMapping("/list/categories")
-    public CocktailListDto getCategories() {
-        return client.getCategories();
-    }
-
     @GetMapping("/list/ingredients")
     public CocktailListDto getIngredients() {
         return client.getIngredients();

@@ -1,6 +1,5 @@
 package com.kitchen.cocktail.client;
 
-import com.kitchen.dto.CocktailDto;
 import com.kitchen.cocktail.configuration.CocktailConfig;
 import com.kitchen.dto.CocktailListDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,18 +37,8 @@ public class CocktailClient {
                 .build().encode().toUri();
     }
 
-    private URI buildUrlGetCategories() {
-        return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/list.php?c=list")
-                .build().encode().toUri();
-    }
-
     private URI buildUrlGetIngredients() {
         return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/list.php?i=list")
-                .build().encode().toUri();
-    }
-
-    private URI buildURLGetAlcoholicFilters() {
-        return UriComponentsBuilder.fromHttpUrl(config.getBasicUrl() + "/list.php?a=list")
                 .build().encode().toUri();
     }
 
@@ -67,10 +56,6 @@ public class CocktailClient {
 
     public CocktailListDto getCocktailById(String id) {
         return restTemplate.getForObject(buildUrlSearchById(id), CocktailListDto.class);
-    }
-
-    public CocktailListDto getCategories() {
-        return restTemplate.getForObject(buildUrlGetCategories(), CocktailListDto.class);
     }
 
     public CocktailListDto getIngredients() {

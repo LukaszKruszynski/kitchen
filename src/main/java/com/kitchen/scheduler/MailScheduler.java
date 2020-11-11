@@ -3,6 +3,7 @@ package com.kitchen.scheduler;
 import com.kitchen.configuration.AdminConfig;
 import com.kitchen.domain.Mail;
 import com.kitchen.service.MailCreatorService;
+import com.kitchen.service.ProductService;
 import org.jetbrains.annotations.Async;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +29,17 @@ public class MailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    private void send (MimeMessagePreparator mimeMessagePreparator) {
+    @Autowired
+    private ProductService productService;
+
+    private void send(MimeMessagePreparator mimeMessagePreparator) {
         LOGGER.info("Starting email preparation...");
         try {
             javaMailSender.send(mimeMessagePreparator);
             LOGGER.info("Email send successful");
         } catch (MailException e) {
-            LOGGER.error("Failed to process email sending! ", e.getMessage(), e); }
+            LOGGER.error("Failed to process email sending! ", e.getMessage(), e);
+        }
     }
 
     private MimeMessagePreparator createMimeMessageDailyExpiryDateMail(final Mail mail) {
@@ -42,15 +47,22 @@ public class MailScheduler {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildDailyExpiryDateMail(mail.getMessage()),true);
+            messageHelper.setText(mailCreatorService.buildDailyExpiryDateMail(mail.getMessage()), true);
         };
     }
 
-    @Scheduled(cron = "0 0 8 * * *")
+    @Scheduled(cron = "0 0 7 * * *")
     public void sendDailyExpiryDateMail() {
-        Mail mail = new Mail(adminConfig.getEmail(),"Approaching the end of expiry date", "The expiry date of your products ends today!");
-        MimeMessagePreparator mimeMessageDailyExpiryDateMail = createMimeMessageDailyExpiryDateMail(mail);
-        send(mimeMessageDailyExpiryDateMail);
-        mailCreatorService.deleteProductNamesExpiryDateToday();
+        Mail mail;
+        if (productService.getProductsWithExpireDateEndsToday().size() == 1) {
+            mail = new Mail(adminConfig.getEmail(), "Approaching the end of expiry date", "The expiry date of your products ends today!");
+        } else {
+            mail = new Mail(adminConfig.getEmail(), "Approaching the end of expiry date", "The expiry date of your product end today!");
+        }
+        if (productService.getProductsWithExpireDateEndsToday().size() > 0) {
+            MimeMessagePreparator mimeMessageDailyExpiryDateMail = createMimeMessageDailyExpiryDateMail(mail);
+            send(mimeMessageDailyExpiryDateMail);
+            mailCreatorService.deleteProductNamesExpiryDateToday();
+        }
     }
 }
